@@ -9,6 +9,4 @@ export -n PYTHONPATH
 export -n name
 export -n shell
 
-export DOTNET_ROOT=`which dotnet | sed "s:/bin/dotnet$::"`
-
 code .

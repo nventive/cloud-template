@@ -100,9 +100,9 @@ cd MyProject
 direnv allow
 ```
 
-3. Install the Aspire .NET workload. *TODO: [use local install](https://discourse.nixos.org/t/dotnet-maui-workload/20370/13) as soon as .NET SDK 8.0.40x is in nixpkgs*
+3. Install the Aspire .NET workload.
 ```console
-$ sudo `which dotnet` workload install aspire 
+$ dotnet workload install aspire 
 ```
 
 4. Rename the project according to your inspirations (`Placeholder` is the actual string to be replaced).
