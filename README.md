@@ -122,7 +122,7 @@ cd MyProject
 direnv allow
 ```
 
-3. Rename the project according to your inspirations (`Placeholder` is the actual string to be replaced; `MyProject` can be whatever you want).
+3. Rename the project according to your inspirations (`Placeholder` is the actual string to be replaced).
 ```console
 fd Placeholder | tac | xargs rnm -rs '/Placeholder/MyProject/g' -y
 fd --hidden --type file --exec sd Placeholder MyProject
