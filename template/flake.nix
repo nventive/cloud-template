@@ -35,8 +35,9 @@
               azure-cli.extensions.containerapp
             ])
             coreutils
-            dotnet-sdk_8
+            curl
             fd
+            just
             nil
             nixpkgs-fmt
             node2nix
@@ -45,6 +46,7 @@
             rnm
             sd
             terraform
+            wget
             yarn
           ];
         };
