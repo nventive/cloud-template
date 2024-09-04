@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RestoreAdditionalProjectSources>
+      https://www.myget.org/F/dapper/api/v3/index.json
+    </RestoreAdditionalProjectSources>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql" Version="8.2.0" />
+    <PackageReference Include="Dapper" Version="2.1.52" />
+  </ItemGroup>
+
+</Project>
