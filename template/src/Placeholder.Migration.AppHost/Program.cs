@@ -1,5 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+// NB: the database setup is the same as in the Placeholder.AppHost project.
 const string weatherDbName = "weather";
 
 var usernameParameter = builder.AddParameter("postgresUsername", secret: true);
@@ -14,11 +15,7 @@ var postgres = builder
 
 var weatherDb = postgres.AddDatabase(weatherDbName);
 
-var apiService = builder.AddProject<Projects.Placeholder_ApiService>("apiservice")
+builder.AddProject<Projects.Placeholder_Migration>("migration")
     .WithReference(weatherDb);
-
-builder.AddProject<Projects.Placeholder_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
-    .WithReference(apiService);
 
 builder.Build().Run();

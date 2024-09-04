@@ -37,3 +37,7 @@ installdotnet:
 # run the project locally
 run: checkdotnet
     dotnet run --project src/Placeholder.AppHost
+
+# run migration to update the database
+migrate: checkdotnet
+    dotnet run --project src/Placeholder.Migration.AppHost

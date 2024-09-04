@@ -6,17 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>6e41954c-3a11-4840-b848-e4684e4bde53</UserSecretsId>
+    <UserSecretsId>8489d24b-e02b-46fe-b876-b7e14cfd8117</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Placeholder.ApiService\Placeholder.ApiService.csproj" />
-    <ProjectReference Include="..\Placeholder.Web\Placeholder.Web.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
     <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Placeholder.Migration\Placeholder.Migration.csproj" />
   </ItemGroup>
 
 </Project>

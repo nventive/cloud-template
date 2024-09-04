@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Placeholder.ServiceDefaults\Placeholder.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Placeholder.Core\Placeholder.Core.csproj" />
   </ItemGroup>
 
 </Project>
