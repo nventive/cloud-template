@@ -3,11 +3,11 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.0</PackageVersion>
-    <PackageId>Nventive.Cloud.Template</PackageId>
+    <PackageId>nventive.Cloud.Templates.Aspire</PackageId>
     <Title>Aspire Template c#</Title>
     <Authors>LaffondDamien</Authors>
-    <Description>Template to use when creating aspire project with dotnet cli.</Description>
-    <PackageTags>dotnet-new;templates;Nventive</PackageTags>
+    <Description>Template to use when creating project with dotnet cli.</Description>
+    <PackageTags>dotnet-new;templates;nventive</PackageTags>
     <TargetFramework>net9.0</TargetFramework>
 
     <IncludeContentInPack>true</IncludeContentInPack>
