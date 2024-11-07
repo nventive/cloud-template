@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.0</PackageVersion>
-    <PackageId>nventive.Cloud.Templates.Aspire</PackageId>
+    <PackageId>nventive.Templates.Aspire</PackageId>
     <Title>Aspire Template c#</Title>
     <Authors>LaffondDamien</Authors>
     <Description>Template to use when creating project with dotnet cli.</Description>
