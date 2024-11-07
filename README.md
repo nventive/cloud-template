@@ -1,6 +1,6 @@
 # Open Source Project Template
 
-This repository contains a template to seed a repository for an Open Source
+This repository contains a template to seed a repository for an Aspire Open Source
 project.
 
 Prior to submitting your request for publication, make sure to review the
