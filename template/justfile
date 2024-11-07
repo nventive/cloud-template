@@ -36,4 +36,4 @@ installdotnet:
 
 # run the project locally
 run: checkdotnet
-    dotnet run --project src/Placeholder.AppHost
+    dotnet run --project src/{{projectname}}.AppHost
