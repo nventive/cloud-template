@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0-rc.1.24511.1" />
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
@@ -11,11 +13,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Placeholder.ApiService\Placeholder.ApiService.csproj" />
+    <ProjectReference Include="..\Placeholder.Migration\Placeholder.Migration.csproj" />
     <ProjectReference Include="..\Placeholder.Web\Placeholder.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0-rc.1.24511.1" />
+    <PackageReference Include="Aspire.Hosting.Azure.PostgreSQL" Version="9.0.0-rc.1.24511.1" />
+    <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="9.0.0-rc.1.24511.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.0.0-rc.1.24511.1" />
+    <PackageReference Include="Azure.Provisioning.PostgreSql" Version="1.0.0-beta.1" />
   </ItemGroup>
 
 </Project>
