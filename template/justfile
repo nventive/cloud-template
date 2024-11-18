@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-dotnet_version := "9.0.100-rc.1.24452.12"
+dotnet_version := "9.0.100"
 azd_version := "1.10.3"
 
 set shell := ["bash", "-c"]

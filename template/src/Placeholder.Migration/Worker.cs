@@ -23,6 +23,7 @@ public class Worker : BackgroundService
         using (var scope = _serviceProvider.CreateScope())
         {
             var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             runner.MigrateUp();
         }
     }
