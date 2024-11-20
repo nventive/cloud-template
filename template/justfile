@@ -1,6 +1,7 @@
 #!/usr/bin/env just --justfile
 
-dotnet_version := "8.0.401"
+dotnet_version := "9.0.100"
+azd_version := "1.10.3"
 
 set shell := ["bash", "-c"]
 
@@ -32,8 +33,23 @@ installdotnet:
     chmod +x dotnet-install.sh
     ./dotnet-install.sh --version {{dotnet_version}} --install-dir .dotnet --no-path
     rm dotnet-install.sh
-    dotnet workload install aspire
 
 # run the project locally
 run: checkdotnet
-    dotnet run --project src/{{projectname}}.AppHost
+    dotnet run --project src/Placeholder.AppHost
+
+# ================================
+#         Migrations
+# ================================
+
+# Get the current timestamp
+timestamp := datetime("%Y%m%d%H%M%S")
+
+# Defines the target directory
+target_dir := "src/Placeholder.Migration/Migrations/" + datetime("%Y") + "/" + datetime("%m")
+
+# Generate a migration file with the specified name
+create-migration MIGRATION_NAME:
+    mkdir -p {{target_dir}}
+    sed "s/{timestamp}/{{ timestamp }}/g; s/{name}/{{ MIGRATION_NAME }}/g" src/Placeholder.Migration/Migrations/template.txt > "{{target_dir}}/{{timestamp}}_{{MIGRATION_NAME}}.cs"
+    echo "Migration file created at {{target_dir}}/{{timestamp}}_{{MIGRATION_NAME}}.cs"
