@@ -18,6 +18,11 @@ public class InitialWeatherData : Migration
             );
         ");
 
+        // Create a unique index on the Date column
+        Execute.Sql(@"
+            CREATE UNIQUE INDEX IX_Weather_Date ON Weather(Date);
+        ");
+
         // Insert some test data
         Execute.Sql(@"
             INSERT INTO Weather (Date, TemperatureC, Summary) VALUES
