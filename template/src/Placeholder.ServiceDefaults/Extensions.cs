@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Scalar.AspNetCore;
 
 namespace Microsoft.Extensions.Hosting;
 
@@ -30,6 +31,8 @@ public static class Extensions
             // Turn on service discovery by default
             http.AddServiceDiscovery();
         });
+
+        builder.Services.AddOpenApi();
 
         return builder;
     }
@@ -104,6 +107,17 @@ public static class Extensions
             {
                 Predicate = r => r.Tags.Contains("live")
             });
+        }
+
+        return app;
+    }
+
+    public static WebApplication ConfigureMiddlewares(this WebApplication app)
+    {
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         return app;
