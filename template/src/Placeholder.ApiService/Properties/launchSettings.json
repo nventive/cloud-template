@@ -5,6 +5,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:7587",
+      "launchUrl": "http://localhost:7587/scalar/v1",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPIRE_ALLOW_UNSECURED_TRANSPORT": "true",
