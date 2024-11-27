@@ -117,7 +117,12 @@ public static class Extensions
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
-            app.MapScalarApiReference();
+            app.MapScalarApiReference(options =>
+            {
+                // This is necessary to ensure consistent API url mapping between the Scalar UI and the browser
+                // See comments in https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/305140 for more information
+                options.Servers = Array.Empty<ScalarServer>();
+            });
         }
 
         return app;
