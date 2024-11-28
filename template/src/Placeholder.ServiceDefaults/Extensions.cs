@@ -114,7 +114,7 @@ public static class Extensions
 
     public static WebApplication ConfigureMiddlewares(this WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
+        if (!app.Environment.IsProduction())
         {
             app.MapOpenApi();
             app.MapScalarApiReference(options =>
