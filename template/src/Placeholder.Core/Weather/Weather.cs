@@ -4,14 +4,16 @@ public class Weather
 {
     public Weather() { }
 
-    public Weather(string date, int temperatureC, string? summary)
+    public Weather(int id, DateTime date, int temperatureC, string? summary)
     {
+        Id = id;
         Date = date;
         TemperatureC = temperatureC;
         Summary = summary;
     }
 
-    public string? Date { get; set; }
+    public int Id { get; set; }
+    public DateTime? Date { get; set; }
 
     public int TemperatureC { get; set; }
 
