@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Scalar.AspNetCore;
 
 namespace Microsoft.Extensions.Hosting;
 
@@ -30,6 +31,8 @@ public static class Extensions
             // Turn on service discovery by default
             http.AddServiceDiscovery();
         });
+
+        builder.Services.AddOpenApi();
 
         return builder;
     }
@@ -103,6 +106,22 @@ public static class Extensions
             app.MapHealthChecks("/alive", new HealthCheckOptions
             {
                 Predicate = r => r.Tags.Contains("live")
+            });
+        }
+
+        return app;
+    }
+
+    public static WebApplication ConfigureOpenApi(this WebApplication app)
+    {
+        if (!app.Environment.IsProduction())
+        {
+            app.MapOpenApi();
+            app.MapScalarApiReference(options =>
+            {
+                // This is necessary to ensure consistent API url mapping between the Scalar UI and the browser
+                // See comments in https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/305140 for more information
+                options.Servers = Array.Empty<ScalarServer>();
             });
         }
 
