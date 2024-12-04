@@ -1,0 +1,57 @@
+pr:
+  branches:
+    include:
+      - main
+      - release/*
+      - feature/*
+
+trigger:
+  branches:
+    include:
+      - main
+
+name: v1.0$(Rev:.r)
+pool:
+  vmImage: "windows-latest"
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "9.x"
+
+  - script: |
+      dotnet new install .\template\
+      dotnet new nv-aspire -n OutputProject -o ./OutputFolder
+    displayName: "Install template and create project"
+
+  - script: |
+      echo "Current Directory:"
+      cd
+      echo "Listing Contents:"
+      dir
+      echo "Checking Output Folder:"
+      dir "./OutputFolder" || echo "OutputFolder not found"
+      echo "Checking Output src:"
+      dir "./OutputFolder/src" || echo "OutputFolder not found"
+    displayName: "Verify Output Folder Contents"
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: "restore"
+      projects: "**/*.AppHost/*.csproj"
+    displayName: "Restore dependencies"
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: "build"
+      projects: "**/*.AppHost/*.csproj"
+      arguments: "--configuration $(buildConfiguration)"
+    displayName: "Build project"
+
+  # - task: DotNetCoreCLI@2
+  #   inputs:
+  #     command: "test"
+  #     projects: "**/*.AppHost/*.csproj"
+  #     arguments: "--configuration $(buildConfiguration) --no-build"
+  #   displayName: "Run tests"
