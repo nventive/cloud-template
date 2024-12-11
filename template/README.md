@@ -1,4 +1,4 @@
-# Placeholder
+# Placeholder - Backend
 
 {Project tag line}
 
@@ -18,7 +18,7 @@ The main prerequisites for a developer setup are:
 
 Precise installations instructions are as follow:
 
-### For WSL Users
+### For WSL Users (windows)
 - If you’re using Docker Desktop, remember to [enable it in your WSL distro](https://docs.docker.com/desktop/wsl/#enabling-docker-support-in-wsl-2-distros)
 - Active WSL extension in VS Code.
 - The ASP.NET Core developement certificate installed in WSL must be trusted in your Windows browser.
@@ -40,7 +40,7 @@ If you get a message " A valid HTTPS certificate is already present." it doesnt 
 
 ```console
 sudo apt update
-sudo apt install dotnet-sdk-8.0
+sudo apt install dotnet-sdk-9.0
 dotnet dev-certs https --clean --import /mnt/c/[path]/https.pfx --password [password]
 sudo mkdir /usr/local/share/ca-certificates/aspnet/
 sudo -E dotnet dev-certs https -ep /usr/local/share/ca-certificates/aspnet/https.crt --format PEM 
@@ -144,10 +144,11 @@ just code
 In command palette (Mac: _command+shift+p_, windows: _ctrl+shift+p_) :
 - .NET: Clean
 - .NET: Build
-- Run > Start Debugging > C# > [ProjectName].AppHost [Default]
+- Run > Start Debugging > C# > Placeholder.AppHost [Default]
+
+*If you're running into an exception on migration just press **Continue** until everything is running, then wait until the database containers are ready and press **Play** ▶︎ on migration container.
 
 Later it can be run from *run & debug* tab.
-
 
 To get a list of other recipes:
 ```console
@@ -157,6 +158,12 @@ just --list
 ## Features
 
 {More details/listing of features of the project}
+
+## Migrations
+The following recipe can be used to create new migrations based on template :
+```console
+just create-migration **migration-name**
+```
 
 ## Breaking Changes
 
