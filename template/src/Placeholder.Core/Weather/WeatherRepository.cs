@@ -11,7 +11,7 @@ internal class WeatherRepository(DbConnection connection) : IWeatherRepository
     public async Task<IEnumerable<Weather>> GetWeathers()
     {
         var query = @"
-            SELECT *
+            SELECT Date, TemperatureC, Summary
             FROM Weather
         ";
 
@@ -19,15 +19,15 @@ internal class WeatherRepository(DbConnection connection) : IWeatherRepository
         return result.ToArray();
     }
 
-    public async Task<Weather?> GetWeather(long id)
+    public async Task<Weather?> GetWeather(DateTime date)
     {
         var query = @"
-            SELECT *
+            SELECT Date, TemperatureC, Summary
             FROM Weather
-            WHERE Id = @Id
+            WHERE Date = @Date
         ";
 
-        return await _dbConnection.QuerySingleOrDefaultAsync<Weather>(query, new { Id = id });
+        return await _dbConnection.QuerySingleOrDefaultAsync<Weather>(query, new { Date = date });
     }
 
     public async Task<Weather?> CreateWeather(Weather weather)

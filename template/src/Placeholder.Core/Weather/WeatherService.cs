@@ -11,9 +11,9 @@ internal class WeatherService(IWeatherRepository weatherRepository) : IWeatherSe
         return await _weatherRepository.GetWeathers();
     }
 
-    public async Task<Weather?> GetWeather(long id)
+    public async Task<Weather?> GetWeather(DateTime date)
     {
-        return await _weatherRepository.GetWeather(id);
+        return await _weatherRepository.GetWeather(date);
     }
 
     public async Task<Weather?> CreateWeather(Weather weather)

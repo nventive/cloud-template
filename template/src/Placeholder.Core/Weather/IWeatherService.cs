@@ -20,7 +20,7 @@ public interface IWeatherService
     /// A task that represents the asynchronous operation. The task result is a <see cref="Weather"/> objects.
     /// If the weather is not found, the task result is <c>null</c>.
     /// </returns>
-    Task<Weather?> GetWeather(long id);
+    Task<Weather?> GetWeather(DateTime date);
 
     /// <summary>
     /// Create a new weather
