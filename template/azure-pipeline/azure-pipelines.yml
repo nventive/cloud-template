@@ -1,0 +1,29 @@
+pr:
+  branches:
+    include:
+      - main
+
+trigger:
+  branches:
+    include:
+      - main
+
+name: v1.0$(Rev:.r)
+
+variables:
+  - group: AzureVariables
+  - name: DOTNET_VERSION
+    value: "9.x"
+  - name: APP_NAME
+    value: "placeholder"
+  - name: AZURE_LOCATION
+    value: "eastus"
+
+pool:
+  vmImage: "ubuntu-latest"
+
+stages:
+  - template: commit-validator.yml
+  - template: build.yml
+  - template: ai-comment.yml
+  - template: environments-loop.yml

@@ -1,0 +1,16 @@
+stages:
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      - stage: Commit_validator
+        displayName: Conventional Commit Validator
+        condition: eq(variables['Build.Reason'], 'PullRequest')
+        jobs:
+          - job: Commit_validator
+            displayName: "Validate Conventional Commits"
+            steps:
+              - task: CommitMessageValidator@1
+                displayName: "Validate Conventional Commits"
+                inputs:
+                  regExPattern: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\.\-\p{Extended_Pictographic}]+\))?(!)?: ([\w \p{Extended_Pictographic}])+([\s\S]*)'
+                  regExFlags: "um"
+                  allCommitsMustMatch: true
+                  prMode: true
