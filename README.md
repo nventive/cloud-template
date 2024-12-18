@@ -32,7 +32,11 @@ If you want to install the template from local nuget (just to confirm the end to
 - execute ```dotnet new install  ./bin/release/nventive.Template.1.0.0.nupkg```
 - uninstall command :  ```dotnet new uninstall nventive.Templates.Aspire```
 
+
 #### Create new project
 
 - execute ``` dotnet new nv-aspire -n MyApp ```
 - follow the project readme.md
+
+#### Parameters
+- appInsights 
