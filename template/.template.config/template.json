@@ -12,8 +12,13 @@
     "language": "C#",
     "type": "solution"
   },
-
-  "symbols": {},
-
+  "symbols": {
+    "appInsights": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include Application Insights integration"
+    }
+  },
   "postActions": []
 }

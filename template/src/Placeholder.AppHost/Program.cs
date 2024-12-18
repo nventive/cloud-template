@@ -8,11 +8,21 @@ var apiService = builder.AddProject<Projects.Placeholder_ApiService>("apiservice
     .WithExternalHttpEndpoints()
     .WithReference(weatherDb);
 
-builder.AddProject<Projects.Placeholder_Migration>("migration")
+var migration = builder.AddProject<Projects.Placeholder_Migration>("migration")
     .WithReference(weatherDb);
 
-builder.AddProject<Projects.Placeholder_Web>("webfrontend")
+var webfrontend = builder.AddProject<Projects.Placeholder_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     .WithReference(apiService);
+
+#if appInsights
+// Use the following for automatic provisioning:
+var appInsights = builder.AddAzureApplicationInsights("appinsights");
+// Use the following for manual provisioning and set a user secret for "ConnectionStrings:AppInsights"
+//var appInsights = builder.AddConnectionString("AppInsights", "APPLICATIONINSIGHTS_CONNECTION_STRING");
+apiService.WithReference(appInsights);
+migration.WithReference(appInsights);
+webfrontend.WithReference(appInsights);
+#endif
 
 builder.Build().Run();
