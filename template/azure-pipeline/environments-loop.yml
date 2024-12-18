@@ -1,0 +1,20 @@
+parameters:
+  - name: environments
+    type: object
+    default:
+      # - dev
+      # - qa
+      # - uat
+      # - stag
+      # - prod
+
+stages:
+  - ${{ if not(eq(variables['Build.Reason'], 'PullRequest')) }}:
+      - ${{ each environment in parameters.environments }}:
+          - stage: "Deploy_${{ environment }}"
+            displayName: "Deploy [${{ environment }}]"
+            dependsOn: Build
+            jobs:
+              - template: deploy.yml
+                parameters:
+                  environment: ${{ environment }}

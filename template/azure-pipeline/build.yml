@@ -1,0 +1,35 @@
+parameters:
+  - name: buildConfiguration
+    type: string
+    default: "Release"
+  - name: projectPath
+    type: string
+    default: "**/*.AppHost/*.csproj"
+
+stages:
+  - stage: Build
+    displayName: Build [multi-env]
+    condition: succeeded()
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - task: UseDotNet@2
+            displayName: "Install .NET $(DOTNET_VERSION) SDK"
+            inputs:
+              packageType: "sdk"
+              version: $(DOTNET_VERSION)
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          - task: DotNetCoreCLI@2
+            displayName: "Restore"
+            inputs:
+              command: restore
+              projects: ${{ parameters.projectPath }}
+
+          - task: DotNetCoreCLI@2
+            displayName: "Build"
+            inputs:
+              command: build
+              projects: ${{ parameters.projectPath }}
+              arguments: "--configuration ${{ parameters.buildConfiguration }} --verbosity detailed"

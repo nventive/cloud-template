@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: placeholder
+services:
+  app:
+    language: dotnet
+    project: ./src/Placeholder.AppHost/Placeholder.AppHost.csproj
+    host: containerapp
