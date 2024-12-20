@@ -18,7 +18,7 @@ steps:
   - task: UseDotNet@2
     inputs:
       packageType: "sdk"
-      version: "9.x"
+      version: "9.0.x"
 
   - script: |
       dotnet new install .\template\
