@@ -4,24 +4,13 @@ stages:
         displayName: AI comments on PR
         condition: eq(variables['Build.Reason'], 'PullRequest')
         jobs:
-          - job: Comment_trigger
-            displayName: Manual Trigger for AI comments
-            pool: server
-            steps:
-              - task: ManualValidation@1
-                timeoutInMinutes: 5
-                inputs:
-                  instructions: "Do you want AI comment on this PR?"
-                  onTimeout: "reject"
           - job: Comment_pr
             displayName: Analyze and Comment on PR
-            dependsOn: Comment_trigger
-            condition: succeeded('Comment_trigger')
             steps:
-              - script: |
-                  python3 -m pip install openai==0.28 requests
-                  python3 azure-pipeline/comment-pr.py
+              - script: python3 -m pip install openai==0.28 requests
+                displayName: "Install dependencies"
+              - script: python3 azure-pipeline/comment-pr.py
                 displayName: "Run PR Analysis"
                 env:
-                  OPENAI_API_KEY: $(OPEN_AI_KEY)
+                  OPENAI_API_KEY: $(OPENAI_API_KEY)
                   SYSTEM_ACCESSTOKEN: $(System.AccessToken)
