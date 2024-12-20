@@ -13,7 +13,7 @@ name: v1.0$(Rev:.r)
 variables:
   - group: AzureVariables
   - name: DOTNET_VERSION
-    value: "9.x"
+    value: "9.0.x"
   - name: APP_NAME
     value: "placeholder"
   - name: AZURE_LOCATION
