@@ -16,10 +16,8 @@ var webfrontend = builder.AddProject<Projects.Placeholder_Web>("webfrontend")
     .WithReference(apiService);
 
 #if appInsights
-// Use the following for automatic provisioning:
 var appInsights = builder.AddAzureApplicationInsights("appinsights");
-// Use the following for manual provisioning and set a user secret for "ConnectionStrings:AppInsights"
-//var appInsights = builder.AddConnectionString("AppInsights", "APPLICATIONINSIGHTS_CONNECTION_STRING");
+
 apiService.WithReference(appInsights);
 migration.WithReference(appInsights);
 webfrontend.WithReference(appInsights);
