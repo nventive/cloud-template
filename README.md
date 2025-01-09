@@ -35,9 +35,9 @@ If you want to install the template from local nuget (just to confirm the end to
 
 #### Create new project
 
-- Run the following command: 
+- Run the following command. Ensure that the name you provide (replacing `MyApp`) contains only letters and numbers : 
 
-```
+```bash
  dotnet new nv-aspire -n MyApp [--appInsights]
 ```
 
