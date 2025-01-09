@@ -10,10 +10,10 @@ namespace Placeholder.AppHost
             var postgres = builder
                 .AddAzurePostgresFlexibleServer("postgres")
                 .WithPasswordAuthentication(username, password)
-                .ConfigureConstruct(construct =>
+                .ConfigureInfrastructure(construct =>
                 {
                     var postgresServer = construct
-                        .GetResources()
+                        .GetProvisionableResources()
                         .OfType<PostgreSqlFlexibleServer>()
                         .Single();
 
