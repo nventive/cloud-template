@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.Hosting;
 
 public static class Extensions
 {
-    public static IHostApplicationBuilder AddPlaceholderCoreServices(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddCoreServices(this IHostApplicationBuilder builder)
     {
         builder.AddNpgsqlDataSource("weather");
         builder.Services.AddScoped<DbConnection>(serviceProvider =>

@@ -7,7 +7,7 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
-builder.AddPlaceholderCoreServices();
+builder.AddCoreServices();
 
 var app = builder.Build();
 
