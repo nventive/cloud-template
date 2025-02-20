@@ -1,0 +1,52 @@
+parameters:
+  - name: environment
+    type: string
+
+jobs:
+  - deployment: "Deploy_${{ parameters.environment }}"
+    displayName: "Deploy [${{ parameters.environment }}]"
+    environment: ${{ parameters.environment }}
+    variables:
+      AZURE_ENVIRONMENT_NAME: "$(APP_NAME)-${{ parameters.environment }}"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - checkout: self
+
+            - task: UseDotNet@2
+              displayName: "Install .NET 9 SDK"
+              inputs:
+                packageType: "sdk"
+                version: $(DOTNET_VERSION)
+                installationPath: $(Agent.ToolsDirectory)/dotnet
+
+            - script: |
+                curl -fsSL https://aka.ms/install-azd.sh | bash
+                echo 'Azure Developer CLI installed'
+              displayName: "Install Azure Developer CLI"
+
+            - task: AzureCLI@2
+              displayName: Provision
+              inputs:
+                azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+                scriptType: bash
+                scriptLocation: inlineScript
+                inlineScript: |
+                  azd config set auth.useAzCliAuth "true"
+                  azd provision --no-prompt
+                addSpnToEnvironment: true
+                visibleAzLogin: true
+              env:
+                AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+                AZURE_ENV_NAME: $(AZURE_ENVIRONMENT_NAME)
+                AZURE_LOCATION: $(AZURE_LOCATION)
+
+            - task: AzureCLI@2
+              displayName: Deploy
+              inputs:
+                azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+                scriptType: bash
+                scriptLocation: inlineScript
+                inlineScript: |
+                  azd deploy --no-prompt

@@ -1,0 +1,16 @@
+stages:
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      - stage: Ai_comment
+        displayName: AI comments on PR
+        condition: eq(variables['Build.Reason'], 'PullRequest')
+        jobs:
+          - job: Comment_pr
+            displayName: Analyze and Comment on PR
+            steps:
+              - script: python3 -m pip install openai==0.28 requests
+                displayName: "Install dependencies"
+              - script: python3 azure-pipeline/comment-pr.py
+                displayName: "Run PR Analysis"
+                env:
+                  OPENAI_API_KEY: $(OPENAI_API_KEY)
+                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
