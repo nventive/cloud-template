@@ -14,8 +14,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 
+app.UseHttpsRedirection();
+
 app.ConfigureOpenApi();
 app.MapWeatherEndpoints();
+app.MapBlobDemoEndpoints();
 app.MapDefaultEndpoints();
 
 app.Run();

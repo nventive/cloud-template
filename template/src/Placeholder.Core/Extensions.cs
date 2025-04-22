@@ -1,7 +1,8 @@
 using System.Data.Common;
-using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 using Placeholder.Core;
+using Placeholder.Core.BlobDemo;
+using Npgsql;
+
 namespace Microsoft.Extensions.Hosting;
 
 public static class Extensions
@@ -15,8 +16,11 @@ public static class Extensions
             return dataSource.CreateConnection();
         });
 
+        builder.AddAzureBlobClient("images");
+
         builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
         builder.Services.AddScoped<IWeatherService, WeatherService>();
+        builder.Services.AddScoped<IBlobDemoService, BlobDemoService>();
         return builder;
     }
 }
