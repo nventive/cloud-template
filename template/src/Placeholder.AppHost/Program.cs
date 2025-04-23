@@ -1,8 +1,8 @@
+using Placeholder.AppHost;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddPostgres("postgres");
-
-var weatherDb = postgres.AddDatabase("weather");
+var weatherDb = builder.ConfigurePostgresDatabase("weather", builder.AddParameter("postgresUsername"), builder.AddParameter("postgresPassword", secret: true));
 
 var blobStorage = builder.AddAzureStorage("storage").AddBlobs("images");
 

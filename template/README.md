@@ -70,7 +70,7 @@ Follow any instructions, including those necessary to get nix in path.
 
 1. Install direnv.
 ```console
-nix profile install nixpkgs#direnv
+nix profile add nixpkgs#direnv
 ```
 
 If running on zsh and getting a `no match found nixpkgs#direnv` error do the following and retry installing direnv :
@@ -108,7 +108,7 @@ sudo chown username /nix/var/nix/profiles/per-user/username
 
 4. Install nix-direnv in your user Nix profile and hook it up to direnv.
 > ```console
-> nix profile install nixpkgs#nix-direnv
+> nix profile add nixpkgs#nix-direnv
 > source $HOME/.nix-profile/share/nix-direnv/direnvrc
 > ```
 
