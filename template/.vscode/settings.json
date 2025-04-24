@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "src/Placeholder.sln"
+    "dotnet.defaultSolution": "src/Placeholder.slnx",
+    "files.autoSave": "onFocusChange"
 }

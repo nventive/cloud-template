@@ -4,7 +4,9 @@ var postgres = builder.AddPostgres("postgres");
 
 var weatherDb = postgres.AddDatabase("weather");
 
-var blobStorage = builder.AddAzureStorage("storage").AddBlobs("images");
+var blobStorage = builder.AddAzureStorage("storage")
+    .RunAsEmulator()
+    .AddBlobs("images");
 
 var apiService = builder
     .AddProject<Projects.Placeholder_ApiService>("apiservice")
@@ -13,18 +15,22 @@ var apiService = builder
     .WithReference(blobStorage);
 
 var migration = builder.AddProject<Projects.Placeholder_Migration>("migration")
-    .WithReference(weatherDb);
+    .WithReference(weatherDb)
+    .WithExplicitStart();
 
 var webfrontend = builder.AddProject<Projects.Placeholder_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     .WithReference(apiService);
 
 #if appInsights
-var appInsights = builder.AddAzureApplicationInsights("appinsights");
+if (builder.ExecutionContext.IsPublishMode)
+{
+    var appInsights = builder.AddAzureApplicationInsights("appinsights");
 
-apiService.WithReference(appInsights);
-migration.WithReference(appInsights);
-webfrontend.WithReference(appInsights);
+    apiService.WithReference(appInsights);
+    migration.WithReference(appInsights);
+    webfrontend.WithReference(appInsights);
+}
 #endif
 
 builder.Build().Run();
