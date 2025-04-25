@@ -4,7 +4,7 @@ using Placeholder.Migration;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.AddServiceDefaults();
+builder.AddWorkerDefaults();
 builder.AddNpgsqlDataSource("weather");
 
 builder.Services.AddFluentMigratorCore()

@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Placeholder.ApiService/Placeholder.ApiService.csproj" />
+  <Project Path="Placeholder.AppHost/Placeholder.AppHost.csproj" />
+  <Project Path="Placeholder.Core/Placeholder.Core.csproj" />
+  <Project Path="Placeholder.Migration/Placeholder.Migration.csproj" />
+  <Project Path="Placeholder.ServiceDefaults/Placeholder.ServiceDefaults.csproj" />
+  <Project Path="Placeholder.Web/Placeholder.Web.csproj" />
+  <Project Path="Placeholder.WorkerDefaults/Placeholder.WorkerDefaults.csproj" />
+</Solution>

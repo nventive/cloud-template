@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Azure.Storage.Blobs" Version="9.0.0" />
-    <PackageReference Include="Aspire.Npgsql" Version="9.0.0" />
-    <PackageReference Include="Dapper" Version="2.1.44" />
+    <PackageReference Include="Aspire.Azure.Storage.Blobs" Version="9.2.0" />
+    <PackageReference Include="Aspire.Npgsql" Version="9.2.0" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
   </ItemGroup>
 
 </Project>
