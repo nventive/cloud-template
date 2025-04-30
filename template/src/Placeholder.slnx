@@ -9,6 +9,5 @@
   <Project Path="Placeholder.Core/Placeholder.Core.csproj" />
   <Project Path="Placeholder.Migration/Placeholder.Migration.csproj" />
   <Project Path="Placeholder.ServiceDefaults/Placeholder.ServiceDefaults.csproj" />
-  <Project Path="Placeholder.Web/Placeholder.Web.csproj" />
   <Project Path="Placeholder.WorkerDefaults/Placeholder.WorkerDefaults.csproj" />
 </Solution>
