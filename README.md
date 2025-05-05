@@ -24,8 +24,8 @@ The following is the template for the final README.md file:
 
 If you want to install the template from source directly :
 
-- execute ``` dotnet new install .\template\   ```
-- you can uninstall with the command  ``` dotnet new uninstall .\template\   ```
+- execute ``` dotnet new install ./template/   ```
+- you can uninstall with the command  ``` dotnet new uninstall ./template/   ```
 
 If you want to install the template from local nuget (just to confirm the end to end creation):
 - execute ``` dotnet pack ```
