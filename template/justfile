@@ -29,6 +29,22 @@ run:
 yarn-install:
     cd src/Placeholder.Web && yarn install --immutable
 
+# Upgrades nix packages to latest version, .Net and Node packages to latest minor version.
+upgrade:
+    nix flake update
+    direnv reload
+    jq --arg new_version "$(dotnet --version)" '.sdk.version = $new_version' global.json | sponge global.json
+    cd src/ && dotnet outdated -u
+    just upgrade-aspire-sdk
+    cd src/Placeholder.Web && ncu --target minor -u && yarn install
+
+upgrade-aspire-sdk:
+    #!/usr/bin/env bash
+    cd src/Placeholder.AppHost/
+    NEW_ASPIRE_VERSION=$(dotnet list package --include-transitive --format json \
+        | jq '.projects[0].frameworks[0].transitivePackages[] | select(.id == "Aspire.Hosting") | .resolvedVersion')
+    sd '(<Sdk Name="Aspire\.AppHost\.Sdk" Version=)"[^"]+"()' '$1'$NEW_ASPIRE_VERSION'$2' Placeholder.AppHost.csproj
+
 # ================================
 #         Migrations
 # ================================
