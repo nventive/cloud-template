@@ -18,7 +18,7 @@ The main prerequisites for a developer setup are:
 
 Precise installations instructions are as follow:
 
-### For WSL Users (windows)
+### For WSL Users (Windows)
 - If you’re using Docker Desktop, remember to [enable it in your WSL distro](https://docs.docker.com/desktop/wsl/#enabling-docker-support-in-wsl-2-distros)
 - Active WSL extension in VS Code.
 - The ASP.NET Core developement certificate installed in WSL must be trusted in your Windows browser.
@@ -28,24 +28,37 @@ Then you need to trust the ASP.NET Core development certificate.
 1. Install the .NET SDK in Windows [whichever way you want](https://learn.microsoft.com/en-us/dotnet/core/install/windows).
 1. Install and activate the ASP.NET Core development certificate (`[password]` being any password you’ll remember in the next minute).
 In Windows terminal:
-```console
+
+```bash
 dotnet dev-certs https --clean
 dotnet dev-certs https --trust
 dotnet dev-certs https -ep https.pfx -p [password]
 ```
-If you get a message " A valid HTTPS certificate is already present." it doesnt failed.
+If you get a message saying "A valid HTTPS certificate is already present.", it's not an error (your command has succeeded).
 
 3. Restart your browser to make sure it trusts the new certificate.
-4. Open a WSL terminal to import the certificate and trust it for inter-service communications (`[path]` being the path to the windows directory you executed the previous commands after `C:`, and `[password]` being the password entered previously):
+4. Open a WSL terminal to import the certificate and trust it for inter-service communications (`[path]` being the path to the windows directory you executed the previous commands after `C:`, and `[password]` being the password entered previously. Also, replace `X.0` with the major .NET SDK version you want to install, for example `dotnet-sdk-9.0`):
 
-```console
+```bash
 sudo apt update
-sudo apt install dotnet-sdk-9.0
+sudo apt install dotnet-sdk-X.0
 dotnet dev-certs https --clean --import /mnt/c/[path]/https.pfx --password [password]
 sudo mkdir /usr/local/share/ca-certificates/aspnet/
-sudo -E dotnet dev-certs https -ep /usr/local/share/ca-certificates/aspnet/https.crt --format PEM 
+sudo -E dotnet dev-certs https -ep /usr/local/share/ca -certificates/aspnet/https.crt --format PEM 
 sudo update-ca-certificates
 ```
+
+NOTE: If you get an error when installing the second command (`sudo apt install dotnet-sdk-X.0`), try the following:
+
+```bash
+wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.de
+rm packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y dotnet-host
+sudo apt-get install -y dotnet-sdk-X.0
+```
+
 
 ### For macOS and straight Linux users
 
