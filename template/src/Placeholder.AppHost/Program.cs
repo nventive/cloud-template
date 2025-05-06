@@ -32,9 +32,18 @@ var webfrontend = builder.AddResource(nodeApp)
     .WithReference(apiService)
     .WaitFor(apiService)
     .WithEnvironment("BROWSER", "none") // Disable opening browser on npm start
-    .WithHttpEndpoint(env: "VITE_PORT")
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
+
+if (builder.ExecutionContext.IsPublishMode)
+{
+    webfrontend.WithHttpEndpoint(env: "VITE_PORT");
+}
+else
+{
+    // This port is also specified in the launch.json.
+    webfrontend.WithHttpEndpoint(port: 7123, env: "VITE_PORT");
+}
 
 apiService.WithReference(webfrontend); // Necessary to setup CORS rule.
 
