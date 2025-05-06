@@ -1,0 +1,22 @@
+name: Conventional Commits
+
+on: [pull_request]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  validate-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v4
+<<<<<<< HEAD
+        with:
+          fetch-depth: 0
+||||||| parent of 09d8d4b (fix: update actions/checkout github action to v4)
+        uses: actions/checkout@v1
+=======
+>>>>>>> 09d8d4b (fix: update actions/checkout github action to v4)
+      - name: Commitsar check
+        uses: docker://aevea/commitsar
