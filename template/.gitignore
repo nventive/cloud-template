@@ -39,9 +39,10 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
-# VS Code generated files except settings.json
+# VS Code generated files except settings.json and launch.json
 .vscode/*
-!.vscode/settings.json  
+!.vscode/settings.json
+!.vscode/launch.json
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -341,3 +342,13 @@ ASALocalRun/
 .mfractor/
 __azurite_db_blob__.json
 __azurite_db_blob_extent__.json
+
+# Yarn
+# yarn.lock # Make sure this is NOT ignored
+yarn-error.log
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+

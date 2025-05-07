@@ -17,6 +17,7 @@
           };
       });
     in {
+
       # Development environments
       devShells = forEachSupportedSystem ({ pkgs }: {
         default =
@@ -35,6 +36,10 @@
             just
             nil
             nixpkgs-fmt
+            nodejs_22
+            typescript
+            typescript-language-server
+            yarn-berry_4
           ];
 
           DOTNET_ROOT = "${dotnetCombined}/share/dotnet";

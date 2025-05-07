@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Aspire AppHost Launch",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/src/Placeholder.AppHost/Placeholder.AppHost.csproj"
+        },
+        {
+            "name": "Launch Web Frontend (Chrome)",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:7123",
+            "webRoot": "${workspaceFolder}/src/Placeholder.Web"
+        },
+        {
+            "name": "Launch Web Frontend (Firefox)",
+            "request": "launch",
+            "type": "firefox",
+            "url": "http://localhost:7123",
+            "webRoot": "${workspaceFolder}/src/Placeholder.Web",
+            "reAttach": true
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Aspire + Frontend (Chrome)",
+            "configurations": [
+                ".NET Aspire AppHost Launch",
+                "Launch Web Frontend (Chrome)"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Aspire + Frontend (Firefox)",
+            "configurations": [
+                ".NET Aspire AppHost Launch",
+                "Launch Web Frontend (Firefox)"
+            ],
+            "stopAll": true
+        }
+    ]
+}

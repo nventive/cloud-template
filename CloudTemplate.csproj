@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="template\**\*" Exclude="template\**\bin\**;template\**\obj\**;template\.direnv\**" />
+    <Content Include="template/**/*" Exclude="**/bin/**;**/obj/**;**/.direnv/**;**/node_modules/**;**/.yarn/**;**/.pnp*" />
     <Compile Remove="**\*" />
   </ItemGroup>
 

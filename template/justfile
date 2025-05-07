@@ -25,6 +25,10 @@ code:
 run:
     dotnet run --project src/Placeholder.AppHost
 
+# Check if yarn packages are installed and install them if not
+yarn-install:
+    cd src/Placeholder.Web && yarn install --immutable
+
 # ================================
 #         Migrations
 # ================================
