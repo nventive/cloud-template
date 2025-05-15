@@ -343,12 +343,25 @@ ASALocalRun/
 __azurite_db_blob__.json
 __azurite_db_blob_extent__.json
 
+# --- Generic Web Project Ignores ---
+# Common for any web project, irrespective of its location
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Logs and specific files for web projects under src/
+# (e.g., src/Placeholder.Web/logs, src/AnotherWebProject/logs)
+src/*/logs/
+src/*/*.log
+
+# Local environment files for web projects under src/
+src/*/*.local
+
 # Yarn
 # yarn.lock # Make sure this is NOT ignored
-yarn-error.log
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
+src/*/.yarn/cache
+src/*/.yarn/unplugged
+src/*/.yarn/build-state.yml
+src/*/.yarn/install-state.gz
+src/*/.pnp.*
 
