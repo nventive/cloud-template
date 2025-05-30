@@ -26,17 +26,20 @@
             sdk_9_0-bin
           ]);
           in pkgs.mkShell {
-          
+
           # Pinned packages available in the environment
           packages = with pkgs; [
             coreutils
             curl
             dotnetCombined
-            dotnet-outdated
+            jq
             just
+            moreutils
             nil
             nixpkgs-fmt
             nodejs_22
+            npm-check-updates
+            sd
             typescript
             typescript-language-server
             yarn-berry_4
