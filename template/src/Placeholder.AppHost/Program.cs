@@ -3,7 +3,7 @@ using Placeholder.AppHost;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var weatherDb = builder.ConfigurePostgresDatabase("weather", builder.AddParameter("postgresUsername"), builder.AddParameter("postgresPassword", secret: true));
+var weatherDb = builder.ConfigurePostgresDatabase("weather");
 
 var blobStorage = builder.AddAzureStorage("storage")
     .RunAsEmulator()
