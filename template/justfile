@@ -1,6 +1,5 @@
 #!/usr/bin/env just --justfile
 
-dotnet_version := "9.0.100"
 azd_version := "1.10.3"
 
 set shell := ["bash", "-c"]
@@ -9,7 +8,7 @@ set shell := ["bash", "-c"]
 default: run
 
 # starts VS Code with appropriate environment variables to allow for debugging
-code: checkdotnet
+code:
     #!/usr/bin/env bash
     # Eliminate environment variables introduced by the nix shell that interfere
     # with Aspire debugging in VS Code. See https://github.com/dotnet/aspire/issues/5389 and
@@ -22,21 +21,29 @@ code: checkdotnet
     export -n shell
     code .
 
-# install .NET locally if it’s not there
-checkdotnet:
-    [ -d .dotnet ] && [[ "$(dotnet --version)" == "{{dotnet_version}}" ]] || just installdotnet 
-
-# install the appropriate .NET version locally
-installdotnet:
-    [ ! -d .dotnet ] || rm -r .dotnet 
-    wget https://dot.net/v1/dotnet-install.sh
-    chmod +x dotnet-install.sh
-    ./dotnet-install.sh --version {{dotnet_version}} --install-dir .dotnet --no-path
-    rm dotnet-install.sh
-
 # run the project locally
-run: checkdotnet
+run:
     dotnet run --project src/Placeholder.AppHost
+
+# Check if yarn packages are installed and install them if not
+yarn-install:
+    cd src/Placeholder.Web && yarn install --immutable
+
+# Upgrades nix packages to latest version, .Net and Node packages to latest minor version.
+upgrade:
+    nix flake update
+    direnv reload
+    jq --arg new_version "$(dotnet --version)" '.sdk.version = $new_version' global.json | sponge global.json
+    cd src/ && dotnet outdated -u
+    just upgrade-aspire-sdk
+    cd src/Placeholder.Web && ncu --target minor -u && yarn install
+
+upgrade-aspire-sdk:
+    #!/usr/bin/env bash
+    cd src/Placeholder.AppHost/
+    NEW_ASPIRE_VERSION=$(dotnet list package --include-transitive --format json \
+        | jq '.projects[0].frameworks[0].transitivePackages[] | select(.id == "Aspire.Hosting") | .resolvedVersion')
+    sd '(<Sdk Name="Aspire\.AppHost\.Sdk" Version=)"[^"]+"()' '$1'$NEW_ASPIRE_VERSION'$2' Placeholder.AppHost.csproj
 
 # ================================
 #         Migrations

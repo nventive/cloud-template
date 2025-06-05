@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "src/Placeholder.sln"
+    "dotnet.defaultSolution": "src/Placeholder.slnx",
+    "dotnet.preferVisualStudioCodeFileSystemWatcher": true,
+    "files.autoSave": "onFocusChange",
+    "firefox.profile": "default-release" // so firefox accepts Asp.Net Core development certificate
 }

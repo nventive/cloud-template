@@ -178,6 +178,15 @@ The following recipe can be used to create new migrations based on template :
 just create-migration **migration-name**
 ```
 
+## Dependencies upgrade
+There is a justfile recipe to upgrade minor versions of dependencies:
+```console
+just upgrade
+```
+
+It is recommended to then relaunch Visual Studio Code (`just code`). Changes can then be tested and committed to git.
+
+
 ## Breaking Changes
 
 Please consult [BREAKING_CHANGES.md](BREAKING_CHANGES.md) for more information about version
