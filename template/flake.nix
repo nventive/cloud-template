@@ -34,7 +34,6 @@
             dotnetCombined
             jq
             just
-            moreutils
             nil
             nixpkgs-fmt
             nodejs_22

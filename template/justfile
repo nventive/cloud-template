@@ -31,12 +31,15 @@ yarn-install:
 
 # Upgrades nix packages to latest version, .Net and Node packages to latest minor version.
 upgrade:
+    #!/usr/bin/env bash
     nix flake update
-    direnv reload
-    jq --arg new_version "$(dotnet --version)" '.sdk.version = $new_version' global.json | sponge global.json
+    mv global.json global.json.old # To avoid the old .NET version to apply when running direnv
+    eval "$(direnv export bash)" # So the new direnv context applies in the recipe
+    jq --arg new_version "$(dotnet --list-sdks | awk '{print $1}' | sort -V | tail -1)" '.sdk.version = $new_version' global.json.old > global.json
+    rm global.json.old
     cd src/ && dotnet outdated -u
     just upgrade-aspire-sdk
-    cd src/Placeholder.Web && ncu --target minor -u && yarn install
+    cd Placeholder.Web && ncu --target minor -u && yarn install
 
 upgrade-aspire-sdk:
     #!/usr/bin/env bash
